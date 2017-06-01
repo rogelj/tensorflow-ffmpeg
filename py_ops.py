@@ -16,15 +16,18 @@ from ffmpeg_reader import FFMPEG_VideoReader
 def _load_video_ffmpeg(filename, n_frames, target_fps, random_chunk):
     """
     Load a video as a numpy array using FFmpeg in [0, 255] RGB format.
+
     :param filename: path to the video file
     :param n_frames: number of frames to decode
     :param target_fps: framerate at which the video will be decoded
     :param random_chunk: grab frames starting from a random position
     :return: (video, length) tuple
-        video: (n_frames, h, w, 3) numpy array containing video frames, as RGB in range [0, 255]
+        video: (n_frames, h, w, 3) numpy array containing video frames,
+                as RGB in range [0, 255]
         height: frame height
         width: frame width
-        length: number of non-zero frames loaded from the video (the rest of the sequence is zero-padded)
+        length: number of non-zero frames loaded from the video
+                (the rest of the sequence is zero-padded)
     """
     # Make sure that the types are correct
     if isinstance(filename, bytes):
@@ -64,12 +67,15 @@ def _load_video_ffmpeg(filename, n_frames, target_fps, random_chunk):
 def decode_video(filename, n_frames=0, fps=-1, random_chunk=False):
     """
     Decode frames from a video. Returns frames in [0, 255] RGB format.
+
     :param filename: string tensor, e.g. dequeue() op from a filenames queue
     :return:
-        video: 4-D tensor containing frames of a video: [time, height, width, channel]
+        video: 4-D tensor containing frames of a video:
+                [time, height, width, channel]
         height: frame height
         width: frame width
-        length: number of non-zero frames loaded from the video (the rest of the sequence is zero-padded)
+        length: number of non-zero frames loaded from the video
+                (the rest of the sequence is zero-padded)
     """
     params = [filename, n_frames, fps, random_chunk]
     dtypes = [tf.float32, tf.int64, tf.int64, tf.int64]
