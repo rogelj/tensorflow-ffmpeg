@@ -17,13 +17,13 @@ from py_ops import decode_video
 def _parse_arguments():
     parser = argparse.ArgumentParser('Test decode_video python op.')
     parser.add_argument('--input_file', help='Path to the video file.')
-    parser.add_argument('--output_file', default=None, 
+    parser.add_argument('--output_file', default=None,
     	help='(Optional) Path to the .npy file where the decoded frames will be stored.')
     parser.add_argument('--play_video', default=False, action='store_true',
                         help='Play the extracted frames.')
-    parser.add_argument('--num_frames', default=30, type=int, 
+    parser.add_argument('--num_frames', default=30, type=int,
     	help='Number of frames per video (sequence length). Set to 0 for full video.')
-    parser.add_argument('--fps', default=-1, type=int, 
+    parser.add_argument('--fps', default=-1, type=int,
     	help='Framerate to which the input videos are converted. Use -1 for the original framerate.')
     parser.add_argument('--random_chunks', default=False, action='store_true',
     	help='Grab video frames starting from a random position.')
@@ -70,7 +70,7 @@ if __name__ == '__main__':
           '\tLoaded frames: %d\n' %
           (str(frames.shape), total_time, seq_length_val))
     if args.output_file:
-    	np.save(args.output_file, frames)
+        np.save(args.output_file, frames)
         print("Stored frames to %s" % args.output_file)
     if args.play_video:
         _show_video(frames, args.fps)
